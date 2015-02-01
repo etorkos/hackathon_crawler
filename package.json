@@ -1,22 +1,26 @@
 {
-  "name": "fsp1",
+  "name": "hackathon_crawler",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/www"
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^2.9.4",
     "body-parser": "^1.11.0",
     "bootstrap": "^3.3.2",
+    "cheerio": "^0.18.0",
     "debug": "^2.1.1",
     "express": "^4.11.1",
+    "http": "0.0.0",
     "mongoose": "^3.8.22",
     "morgan": "^1.5.1",
     "path": "^0.11.14",
+    "request": "^2.51.0",
     "swig": "^1.4.2"
   }
 }

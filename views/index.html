@@ -2,14 +2,15 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h3>{{title}}</h3>
+    <h3></h3>
     <hr>
     <ul class="list-unstyled ">
     	{% for event in events %}
     		<ul class="col-md-3">
-    			{{ event.title }}
-    			{{ event.date }}
-    			{{ event.url }} </ul>
+    			<ul>{{ event.title }}</ul>
+    			<ul>{{ event.date }}</ul>
+    			<ul>{{ event.url }} </ul>
+            </ul>
     	{% endfor %}
     </ul>
 {% endblock %}

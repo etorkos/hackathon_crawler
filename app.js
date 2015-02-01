@@ -6,24 +6,20 @@ var routes = require('./routes/index');
 var path = require('path');
 var app = express();
 
-app.engine('html', swig.renderFile);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', routes);
-
-app.listen(4000, function(){
+app.listen(3000, function(){
 	console.log('App is listening');
 })
 
+app.use(logger(":method :url :status :response-time ms - :res[content-length]"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public'));
+app.use('/', routes);
+swig.setDefaults({cache: false});
 
-
-
-
+app.engine('html', swig.renderFile);
+app.set('views', './views');
+app.set('view engine', 'html');
 
 //ERROR HANDLERS
 app.use(function(req, res, next) {
@@ -31,25 +27,5 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-if (app.get('env') === 'development') {
-    swig.setDefaults({ cache: false });
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
 
 module.exports = app;

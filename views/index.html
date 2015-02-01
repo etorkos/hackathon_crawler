@@ -1,0 +1,17 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+    <h3>{{title}}</h3>
+    <hr>
+    <ul class="list-unstyled ">
+    	{% for event in events %}
+    		<ul class="col-md-3">
+    			{{ event.title }}
+    			{{ event.date }}
+    			{{ event.url }} </ul>
+    	{% endfor %}
+    </ul>
+{% endblock %}
+
+

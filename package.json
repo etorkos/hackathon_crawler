@@ -1,0 +1,22 @@
+{
+  "name": "fsp1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./bin/www"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.11.0",
+    "bootstrap": "^3.3.2",
+    "debug": "^2.1.1",
+    "express": "^4.11.1",
+    "mongoose": "^3.8.22",
+    "morgan": "^1.5.1",
+    "path": "^0.11.14",
+    "swig": "^1.4.2"
+  }
+}

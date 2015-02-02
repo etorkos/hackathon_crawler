@@ -7,7 +7,7 @@ var Event;
 var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
-  title: String,//protected
+  title: {type: String, unique: true }, //protected
   url: String,//protected
   body:   String, //changes. duh.
   date: { type: Date, default: Date.now }, //updates every update

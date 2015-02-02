@@ -21,7 +21,7 @@ var search = function(callback){
 				var location = data.find('.text-uppercase').text();
 				var date = data.find('.hackathon_date').text();
 				if(isInNyc(location)){
-					var a = {hackathonName: name, link: link, location: location, date: date}
+					var a = {name: name, link: link, location: location, date: date}
 					hackathons.push(a);
 					console.log('adding a hackerleague hackathon');
 				}
@@ -40,12 +40,13 @@ var search = function(callback){
 				location = location.split(/\s{2,}/)[1];
 
 				if(isInNycForEventBrite(location) && isAHackathon(name)){
-					var a = {hackathonName: name, link: link, location: location, date: date}
+					var a = {name: name, link: link, location: location, date: date}
 					hackathons.push(a);
 					console.log('added an eventbrite hackathon');
 				}
 			})
-			return callback(null, hackathons);
+
+			return callback(null, removeDuplicates(hackathons));
 
 		}
 	})).nodeify(callback);
@@ -83,19 +84,25 @@ var search = function(callback){
 			return false;
 		}
 	}
-	//function remove duplicates
-	// function removeDuplicates (array){
-	// 	console.log('hackathons', array.length);
-	// 	var checkedHackathons = [];
-	// 	for(var a = 1; a < array.length; a++){
-	// 		if(array[0].hackathonName == array[a].hackathonName){
-	// 			array.shift()
-	// 		}
-	// 	}
-	// 	checkedHackathons.push()
-	// }
 
-
+	function removeDuplicates (array){
+		console.log('hackathons', array.length);
+		var checkedHackathons = [];
+		checkedHackathons.push(array.shift());
+		for(var a = 0; a < array.length; a++){
+			var unique = true;
+			console.log(array[a]);
+			for(var b=0; b<checkedHackathons.length; b++){
+				if(array[a].name === checkedHackathons[b].name){
+					unique = false;
+				}
+			}
+			if(unique){
+				checkedHackathons.push(array[a]);
+			}
+		}
+		return checkedHackathons;
+	}
 }
 
 module.exports = search;

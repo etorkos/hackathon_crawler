@@ -6,24 +6,24 @@ var crawl = require('./crawler.js')
 
 router.get('/', function(req, res, next){
 
-	// models.Event.find({}, function(err, result){
-	// 	res.render(result);
-	// })
-	console.log("initiated");
-	var sample1 = [{
-		title: "sample 1",
-		url: "undefined",
-		date: "Jan 15, 2015"},
-		{title: "sample 2",
-		url: "www.google.com",
-		date: "yesterday"}];
+	models.Event.find({}, function(err, result){
+		res.render('index', {events: result});
+	})
+	// console.log("initiated");
+	// var sample1 = [{
+	// 	title: "sample 1",
+	// 	url: "undefined",
+	// 	date: "Jan 15, 2015"},
+	// 	{title: "sample 2",
+	// 	url: "www.google.com",
+	// 	date: "yesterday"}];
 
-	res.render('index', sample1);
+	// res.render('index', {events: sample1});
 })
 
 router.post('/submit', function(req, res, next){
 	//get objects from crawler
-	//filter objects by whats already in the database
+	//filter objects by whats already in the database (done with uniqueness call)
 	//create new events for what is new
 	//add events to the db
 	//refresh page 
@@ -31,7 +31,18 @@ router.post('/submit', function(req, res, next){
 	Promise.fromNode(function(callback){
 		crawl(callback)
 	}).then(function(allUnfilteredEvents){
-		res.render("index", allUnfilteredEvents);
+		//res.render("index", {events: allUnfilteredEvents});
+		allUnfilteredEvents.forEach(function(row){
+			models.Event.create({
+				name: row.name,
+				location: row.location,
+				link: row.link,
+				date: row.date}).then(function(newEvent){
+					newEvent.save();
+				})
+		})
+	}).then(function(){
+		res.redirect('/');
 	})
 })
 

@@ -17,7 +17,7 @@ var search = function(callback){
 			$( '.container .thumbnail').each(function(){
 				var data = $(this);
 				var name = data.children().children().text();
-				var link = 'www.hackerleague.org' + data.children().children().attr('href');
+				var link = '//www.hackerleague.org' + data.children().children().attr('href');
 				var location = data.find('.text-uppercase').text();
 				var date = data.find('.hackathon_date').text().replace(/st|nd|rd|th/g, "");
 				if(isInNyc(location)){

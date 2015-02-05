@@ -17,16 +17,21 @@ var search = function(callback){
 			$( '.container .thumbnail').each(function(){
 				var data = $(this);
 				var name = data.children().children().text();
-				var link = data.children().children().attr('href');
+				var link = 'www.hackerleague.org' + data.children().children().attr('href');
 				var location = data.find('.text-uppercase').text();
-				var date = data.find('.hackathon_date').text();
+				var date = data.find('.hackathon_date').text().replace(/st|nd|rd|th/g, "");
 				if(isInNyc(location)){
 					var a = {name: name, link: link, location: location, date: date}
 					hackathons.push(a);
-					console.log('adding a hackerleague hackathon');
+					console.log('added a hackerleague hackathon');
 				}
 		});
 	}}).then(
+	request.getAsync()
+
+
+
+	).then(
 	request.getAsync('https://www.eventbrite.com/d/new-york--new-york/hackathon/?crt=regular&page=1&slat=40.7128&slng=-74.0059&sort=date&vp_ne_lat=40.9153&vp_ne_lng=-73.7003&vp_sw_lat=40.4914&vp_sw_lng=-74.2591', function(err, resp, body){
 		if(!err & resp.statusCode == 200){
 			var $ = cheerio.load(body);
@@ -86,12 +91,10 @@ var search = function(callback){
 	}
 
 	function removeDuplicates (array){
-		console.log('hackathons', array.length);
 		var checkedHackathons = [];
 		checkedHackathons.push(array.shift());
 		for(var a = 0; a < array.length; a++){
 			var unique = true;
-			console.log(array[a]);
 			for(var b=0; b<checkedHackathons.length; b++){
 				if(array[a].name === checkedHackathons[b].name){
 					unique = false;

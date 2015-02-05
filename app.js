@@ -7,7 +7,7 @@ var path = require('path');
 var app = express();
 
 app.listen(3000, function(){
-	console.log('App is listening');
+	console.log('App is listening on port 3000');
 })
 
 app.use(logger(":method :url :status :response-time ms - :res[content-length]"));

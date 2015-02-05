@@ -4,12 +4,12 @@
 {% block content %}
     <h3></h3>
     <hr>
-    <ul class="list-unstyled ">
+    <ul class="list-unstyled col-md-10">
     	{% for event in events %}
-    		<ul class="col-md-3">
-    			<ul>{{ event.name }}</ul>
-    			<ul>{{ event.date }}</ul>
-    			<ul>{{ event.link }} </ul>
+    		<ul class="thing col-md-offset-1">
+    			<ul class= "title">{{ event.name }}</ul>
+    			<ul>{{ event.date.toDateString() }}</ul>
+    		   <a class="link" href= "{{ event.link }} "> Link to host page </a>
             </ul>
     	{% endfor %}
     </ul>

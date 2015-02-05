@@ -4,4 +4,5 @@ Functionality: queries eventbrite + hackerleague for local NYC hackathons and di
 
 Week 3 personel project from Fullstack Academy
 
+P.S. you can click on the broken link to bring up the actual image.
 ![alt tag](https://github.com/etorkos/hackathon_crawler/tree/master/public/img/hackathon_crawler.png)
